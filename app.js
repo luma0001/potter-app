@@ -3,7 +3,7 @@
 // ============ LOAD & INIT APP ============ //
 window.addEventListener("load", initApp);
 
-function initApp() {
+function initApp01() {
   // Harry Potter
   const harry = {
     name: "Harry Potter",
@@ -109,7 +109,38 @@ function initApp() {
   showCharacter(hermione);
 }
 
+async function initApp() {
+  console.log("Init app is running");
+  const harry = await getCharacter(
+    "https://raw.githubusercontent.com/cederdorff/dat-js/main/data/harry.json"
+
+    // const harry = ("potter-app/harry.jason");
+  );
+
+  showCharacter(harry);
+}
+
+async function getCharacter(url) {
+  const response = await fetch(url);
+  const data = await response.json();
+  console.log(data);
+  return data;
+}
+
 function showCharacter(character) {
+  document.querySelector("#character").insertAdjacentHTML(
+    "beforebegin",
+    /*html*/ `
+  <article>
+  <img src=${image}>
+  <h2>${name}</h2>
+  <h3>${house}</h3>
+  </article>
+  `
+  );
+}
+
+function showCharacter01(character) {
   console.log(character["image"]);
   const myHTML =
     /*html*/
